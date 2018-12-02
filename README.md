@@ -1,6 +1,6 @@
 # Laravel Forum Package - Chatter
 
-### INSTALLATION
+### I INSTALLATION
 
 <strong>Background</strong>: This package arises from the necessity to create taxonomies in various projects I create for my clients. It can be used in any other project. It comes with minimal CSS so that it can be adjustable as needed
 
@@ -56,12 +56,12 @@
 
 Now, visit your ``` site.com/chatteradmin ``` and you should see your new forum admin once logged in!
 
-### Upgrading
+### II Upgrading
 
 Coming soon
 
 
-### USAGE
+### III USAGE
 
 1.``` $paginatedTerms  gloabal ``` is a list of paginated terms of a particular taxonomy. Useful if you want to create a list of the items in a paginated way.  It is set in the Service Provider and takes the taxonomy from the URL ?taxonomy=XYZ or takes the  defgault, which is ```category``` e.g 
 
@@ -87,7 +87,7 @@ Coming soon
     Once you have run the ``` php artisan vendor:publish --provider="Codiiv\Taxonomies\TaxonomiesServiceProvider" ``` that command will copy the taxonomies.php  to  ``` config/taxonomies.php ```. You can change the vaiables as needed
 
 
-### SCREENSHOTS
+### IV SCREENSHOTS
 
 ![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot1.png)
 
