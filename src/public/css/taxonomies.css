@@ -1,0 +1,30 @@
+.taxonomies-main *{margin: 0; padding: 0}
+fieldset {padding: 1rem !important;}
+fieldset input[type="text"] {border: none;padding: 0.60rem;border-radius: 0.2rem;width: 60%;box-shadow: 0 0 8px #ccc;}
+fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block;}
+.button--filled.button--primary {border: none;background: #0f40fe;color: #fff;padding: 1rem;font-size: 1.6rem;border-radius: 0.2rem;width: 20rem;display: block;margin: 2rem auto 0;cursor: pointer;}
+.button--filled.button--primary:hover {background: #6b9cff;}
+.taxonomies-menu li {list-style: none;display: inline-block;vertical-align: middle;text-align: center;}
+.taxonomies-menu li a{display: block; margin: auto;padding: 0.75rem; }
+.description {width: 60%;display: inline-block;vertical-align: middle;}
+.inner-ul-li {padding: 2rem;}
+.inner-ul-li ul,.inner-ul-li ul li{ list-style: none;}
+.pagination li span, .pagination li a {width: 2rem;text-align: center;padding: 0.5rem;}
+.pagination-container {margin: 2rem 0 1rem;}
+.the-items li {
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    padding: 0.5rem;
+}
+.the-items li:nth-child(2n+1){ background-color: #ccc;}
+.the-items li:hover { background-color: #fff}
+
+@media only screen and (min-width: 37.5em){
+  .grid__column--6 {width: 50%;display: inline-block;vertical-align: top;}
+  fieldset label {vertical-align: middle;display: inline-block;}
+
+}
+@media only screen and (min-width: 56.25em){
+
+
+}
