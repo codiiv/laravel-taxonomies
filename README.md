@@ -2,7 +2,7 @@
 
 ### Installation
 
-<strong>Background</strong>: This package arises from the necessity to create taxonomies in various projects I create for my clients
+<strong>Background</strong>: This package arises from the necessity to create taxonomies in various projects I create for my clients. It can be used in any other project. It comes with minimal CSS so that it can be adjustable as needed
 
 1. Include the package in your project
 
