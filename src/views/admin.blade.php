@@ -8,7 +8,7 @@
 <div class="taxonomies-main">
   @include('taxonomies::partials.taxonomymenu')
   <?php
-    $taxs = $Tax::sortedTerms($taxonomy, null, 0, []);
+    $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
   ?>
   <div class="grid">
      <div class="grid__column grid__column--6 grid__column--#--sm ">
@@ -47,12 +47,18 @@
      </div><div class="grid__column grid__column--6 grid__column--#--md ">
        <div class="inner-ul-li">
          <ul class="the-items">
-           @foreach($paginatedTaxonomies as $key => $taxx )
-           <li data-value="{{ $taxx->id }}" class="level-{{ $taxx->level }}"><a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$taxx->id }}">{{ $taxx->pointer.' '.$taxx->name }}</a></li>
+           <input type="hidden" name="_token" value="{{ csrf_token() }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
+           @foreach($paginatedTerms as $key => $term )
+           <li data-value="{{ $term->id }}" class="level-{{ $term->level }}">
+             <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }}</a>
+             <div class="taxonomies-actions" style="display:none">
+               <button type="button" name="button" class="btn-button disable-taxonomy btn-normal" disabled>{{ __("Disable") }}</button><button type="button" name="button" class="btn-button btn-dangerous delete-taxonomy" disabled>{{ __("Delete") }}</button>
+             </div>
+           </li>
            @endforeach
          </ul>
          <div class="pagination-container">
-           {{ $paginatedTaxonomies->links() }}
+           {{ $paginatedTerms->links() }}
          </div>
        </div>
      </div>
@@ -63,5 +69,8 @@
 
 
 @section(Config::get('taxonomies.yields.footer'))
+
 <script src="{{ url('/taxonomies/assets/js/jscolor.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{{ url('/taxonomies/assets/js/taxonomies.js') }}"></script>
 @endsection

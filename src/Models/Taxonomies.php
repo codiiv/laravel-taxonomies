@@ -25,8 +25,9 @@ class Taxonomies extends Model
     static public function sortedTerms($taxonomy, $parentID = null, $level=0, $list=array()){
       $pointer = '';
       for ($i=0; $i < $level; $i++) {
-        $pointer = $pointer.'—';
+        $pointer = $pointer.\Config::get('taxonomies.default_pointer_sign');
       }
+
       if($level==0){
         $terms = Taxonomies::whereNull('parent_id')->where("taxonomy", $taxonomy)->with('children')->get();
       }else{
@@ -64,7 +65,7 @@ class Taxonomies extends Model
     static public function taxonomySelect($wrappers=['', '<ul>','</ul>'], $taxonomy, $parentID=null, $level = 0){
       $pointer = '';
       for ($i=0; $i < $level; $i++) {
-        $pointer = $pointer.'—';
+        $pointer = $pointer.\Config::get('taxonomies.default_pointer_sign');
       }
       $type  = $wrappers[0];
       $xhtml = $wrappers[1];

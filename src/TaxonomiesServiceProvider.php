@@ -34,7 +34,10 @@ class TaxonomiesServiceProvider extends ServiceProvider
        $request =  Request();
        if(\Auth::check()) {
          $theTaxs = new Models\Taxonomies();
-         $view->with('Tax', $theTaxs);
+         $custom = new Models\Custom();
+         $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+
+         $view->with('Taxonomy', $theTaxs);
 
          // $sortedList = $common::getTermsSorted($taxonomy);
          //
@@ -45,22 +48,24 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $view->with('taxonomiesPath', \Config::get('taxonomies.taxonomy_path'));
 
          if(isset($_GET['taxonomy'])){
-           $view->with('taxonomy', $_GET['taxonomy']);
            $collection = collect($theTaxs::sortedTerms($_GET['taxonomy'], null, 0, []));
 
          }else{
-           $view->with('taxonomy', 'category');
-           $collection = collect($theTaxs::sortedTerms('category', null, 0, []));
-
+           $defaultCat = \Config::get('taxonomies.default_taxonomy');
+           $collection = collect($theTaxs::sortedTerms($defaultCat, null, 0, []));
          }
-         $custom = new Models\Custom();
+         $view->with('taxonomy', $taxonomy);
+
          $view -> with('taxonomies', $custom::Taxonomies());
 
          $page = isset($_GET['page']) ? $_GET['page'] : 1;
-         $perPage = 10;
-         $paginatedTaxonomies = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$_GET['taxonomy'])]);
-         $view->with('paginatedTaxonomies', $paginatedTaxonomies);
 
+         $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+
+         $itemsPerPage = \Config::get('taxonomies.terms_per_page');
+         $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
+         $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+         $view->with('paginatedTerms', $paginatedTerms);
        };
       });
     }

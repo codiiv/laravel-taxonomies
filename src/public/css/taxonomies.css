@@ -18,7 +18,8 @@ fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block;}
 }
 .the-items li:nth-child(2n+1){ background-color: #ccc;}
 .the-items li:hover { background-color: #fff}
-
+.btn-button {display: inline-block;vertical-align: middle;border: none;margin-right: 0.5rem;padding: 0.3rem 2rem;border-radius: 0.2rem; cursor: pointer;box-shadow: 0px 0px 4px #3A3A3A;}
+.tax-color {width: 1.5rem;height: 1.5rem;display: inline-block;vertical-align: middle;border-radius: 1rem;}
 @media only screen and (min-width: 37.5em){
   .grid__column--6 {width: 50%;display: inline-block;vertical-align: top;}
   fieldset label {vertical-align: middle;display: inline-block;}

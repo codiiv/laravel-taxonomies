@@ -81,4 +81,16 @@ class TaxonomiesController extends Controller
     $taxonomiesPath = \Config::get('taxonomies.taxonomy_path');
     return redirect($taxonomiesPath.'?taxonomy='.$tax->taxonomy)->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype]);
   }
+
+  public function deleteTaxonomy(Request $request){
+    $page     = isset($_GET['page']) ? $_GET['page'] : 1;
+    $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+    // $dis = Taxonomies::where('id', $taxonomy)->first();
+    // $directParent = $dis->parent_id;
+    // // We update direct descendants if any
+    // $updateOrphans = Taxonomies::where('parent_id', $cat)
+    // ->update(['parent_id' => $directParent]);
+    
+
+  }
 }
