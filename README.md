@@ -63,7 +63,7 @@ Coming soon
 
 ### III  ======================= USAGE  =======================
 
-1.``` $paginatedTerms  gloabal ``` is a list of paginated terms of a particular taxonomy. Useful if you want to create a list of the items in a paginated way.  It is set in the Service Provider and takes the taxonomy from the URL ?taxonomy=XYZ or takes the  defgault, which is ```category``` e.g 
+1.``` $paginatedTerms  global ``` is a list of paginated terms of a particular taxonomy. Useful if you want to create a list of the items in a paginated way.  It is set in the Service Provider and takes the taxonomy from the URL ?taxonomy=XYZ or takes the  defgault, which is ```category``` e.g 
 
 ```
          <ul class="the-items">
@@ -81,6 +81,22 @@ Coming soon
 
 ```
 ![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot2.png)
+
+
+DROPDOWN 
+```$Taxonomy  and $taxonomy``` are set  globally via the service provider. ```$Taxonomy``` is the DB object while the ```$taxonomy``` is set by the <strong>taxonomy</strong> query string parameter or lack thereof, in which case the default  taxonomy is picked up
+
+``` <?php $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []); ?> ```
+
+``` 
+    <select class="parent" name="parent">
+       <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
+       @foreach($taxs as $key => $tax)
+          <option value="{{ $tax->id }}" class="level-{{ $tax->level }}">{{ $tax->pointer.' '.$tax->name }}</option>
+       @endforeach
+    </select>
+```
+![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/dropdown.png)
 
 2. Configure Default Values
 
