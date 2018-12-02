@@ -1,6 +1,6 @@
 # Laravel Forum Package - Chatter
 
-### Installation
+### INSTALLATION
 
 <strong>Background</strong>: This package arises from the necessity to create taxonomies in various projects I create for my clients. It can be used in any other project. It comes with minimal CSS so that it can be adjustable as needed
 
@@ -60,7 +60,34 @@ Now, visit your ``` site.com/chatteradmin ``` and you should see your new forum 
 
 Coming soon
 
-### Screenshots
+
+### USAGE
+
+1.``` $paginatedTerms  gloabal ``` is a list of paginated terms of a particular taxonomy. Useful if you want to create a list of the items in a paginated way.  It is set in the Service Provider and takes the taxonomy from the URL ?taxonomy=XYZ or takes the  defgault, which is ```category``` e.g 
+
+```
+         <ul class="the-items">
+           @foreach($paginatedTerms as $key => $term )
+           <li data-value="{{ $term->id }}" class="level-{{ $term->level }}">
+                <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}">
+                    {{ $term->pointer.' '.$term->name }}
+                </a>
+           </li>
+           @endforeach
+         </ul>
+         <div class="pagination-container">
+           {{ $paginatedTerms->links() }}
+         </div>
+
+```
+![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot2.png)
+
+2. Configure Default Values
+
+    Once you have run the ``` php artisan vendor:publish --provider="Codiiv\Taxonomies\TaxonomiesServiceProvider" ``` that command will copy the taxonomies.php  to  ``` config/taxonomies.php ```. You can change the vaiables as needed
+
+
+### SCREENSHOTS
 
 ![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot1.png)
-![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot2.png)
+
