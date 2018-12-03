@@ -1,7 +1,7 @@
 .taxonomies-main *{margin: 0; padding: 0}
 fieldset {padding: 1rem !important;}
 fieldset input[type="text"] {border: none;padding: 0.60rem;border-radius: 0.2rem;width: 60%;box-shadow: 0 0 8px #ccc;}
-fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block;}
+fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block; letter-spacing:0}
 .button--filled.button--primary {border: none;background: #0f40fe;color: #fff;padding: 0rem;font-size: 1.6rem;border-radius: 0.2rem;width: 20rem;display: block;margin: 2rem auto 0;cursor: pointer;}
 .button--filled.button--primary:hover {background: #6b9cff;}
 .taxonomies-menu li {list-style: none;display: inline-block;vertical-align: middle;text-align: center;}
