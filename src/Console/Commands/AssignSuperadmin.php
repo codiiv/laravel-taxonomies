@@ -4,7 +4,7 @@ namespace Codiiv\Taxonomies\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\User;
-use Codiiv\Taxonomies\Models\Usermeta;
+use Codiiv\Extrameta\Models\Usermeta;
 
 class AssignSuperadmin extends Command
 {
@@ -44,8 +44,8 @@ class AssignSuperadmin extends Command
         if(User::where('email',$email)->exists()){
           $userX  = User::where('email',$email)->first();
           $userid  = $userX->id;
-          $usermeta = new Usermeta;
-          $adminset = Usermeta::where('user_id',$userid)->where('meta_key','user_level')->first();
+          $usermeta = new Codiiv\Extrameta\Models\Usermeta;
+          $adminset = Codiiv\Extrameta\Models\Usermeta::where('user_id',$userid)->where('meta_key','user_level')->first();
           if($adminset){
             $usermeta->user_id = $userid;
             $usermeta->meta_key = 'user_level';

@@ -10,7 +10,7 @@
         "laravel locations"
     ],
     "require": {
-
+      "codiiv/extrameta": "dev-master"
     },
     "license": "MIT",
     "authors": [
