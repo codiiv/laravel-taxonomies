@@ -87,8 +87,12 @@ class TaxonomiesController extends Controller
     $taxonomiesPath = \Config::get('taxonomies.taxonomy_path');
     return redirect($taxonomiesPath.'?taxonomy='.$tax->taxonomy.($pageNumber > 1 ? '&page='.$pageNumber : ''))->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype]);
   }
+  /*
+  | Method : updateTaxonomy
+  | @param : $request
+   */
   public function updateTaxonomy(Request $request){
-    // $slug = str_slug('Laravel 5 Framework', '-');
+
     $tax            = new Taxonomies;
     $taxonomy  = $request->taxonomy;
     $term_id  = $request->term_id;
