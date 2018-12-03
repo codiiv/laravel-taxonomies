@@ -13,6 +13,7 @@ Route::group(['prefix' => $taxonomiesPath,  'middleware' => ['web','auth']], fun
    * POST ROUTES
    */
    Route::post('new/taxonomy', 'Codiiv\Taxonomies\Controllers\TaxonomiesController@newTaxonomy')->name('post.new.taxonomy');
+   Route::post('update/taxonomy', 'Codiiv\Taxonomies\Controllers\TaxonomiesController@updateTaxonomy')->name('post.update.taxonomy');
    Route::post('delete/taxonomy', 'Codiiv\Taxonomies\Controllers\TaxonomiesController@deleteTaxonomy')->name('post.delete.taxonomy');
 
 });

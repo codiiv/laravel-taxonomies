@@ -13,46 +13,30 @@
   <div class="grid">
      <div class="grid__column grid__column--6 grid__column--#--sm ">
        <div class="cat-list-inner">
-        <form class="new-tax-form" action="{{ $taxonomiesPath.'/new/taxonomy' }}" method="post">
-          @csrf
-          <input type="hidden" name="taxonomy" value="{{ $taxonomy }}">
-          <fieldset>
-            <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
-          </fieldset>
-          <fieldset>
-            <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
-                  <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
-                @foreach($taxs as $key => $tax)
-                  <option value="{{ $tax->id }}" class="level-{{ $tax->level }}">{{ $tax->pointer.' '.$tax->name }}</option>
-                @endforeach
-              </select>
-          </fieldset>
-          <fieldset>
 
-            <label for="name">{{ __("Color") }}</label><input type="text" class="jscolor" name="color" value="ab2567" required="" autocomplete="off" style="background-image: none; background-color: rgb(171, 37, 103); color: rgb(255, 255, 255);">
+         @if($term_exists)
+            @include('taxonomies::partials.editform')
+         @else
+            @include('taxonomies::partials.newform')
+         @endif
 
-          	<script>
-          	function setTextColor(picker) {
-          		document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
-          	}
-          	</script>
-
-          </fieldset>
-          <fieldset>
-            <label for="description">Description</label><textarea name="description" class="description"></textarea>
-          </fieldset>
-          <button type="submit" class="control__button button button--filled button--primary" name="button">Add New</button>
-        </form>
        </div>
      </div><div class="grid__column grid__column--6 grid__column--#--md ">
        <div class="inner-ul-li">
          <ul class="the-items">
-           <input type="hidden" name="_token" value="{{ csrf_token() }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
+           <form class="delete-taxonomy-term" action="{{ url( \Config::get('taxonomies.taxonomy_path').'/delete/taxonomy' ) }}" method="post">
+             <input type="hidden" name="_token" value="{{ csrf_token() }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
+             <input type="hidden" name="tobedeleted" value=""> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
+             <input type="hidden" name="taxonomy" value="{{ $taxonomy }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
+             <?php if(isset($_GET['page'])){ ?>
+               <input type="hidden" name="page" value="{{ $_GET['page'] }}">
+             <?php } ?>
+           </form>
            @foreach($paginatedTerms as $key => $term )
-           <li data-value="{{ $term->id }}" class="level-{{ $term->level }}">
-             <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }}</a>
+           <li data-value="{{ $term->id }}" class="level-{{ $term->level }} @if((isset($term_exists) && $term_exists) && $the_term->id == $term->id) beingedited @endif">
+             <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}<?php if(isset($_GET['page'])) echo '&page='.$_GET['page']; ?>"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }} <span class="theslug">[ {{ $term->slug }} ]</span></a>
              <div class="taxonomies-actions" style="display:none">
-               <button type="button" name="button" class="btn-button disable-taxonomy btn-normal" disabled>{{ __("Disable") }}</button><button type="button" name="button" class="btn-button btn-dangerous delete-taxonomy" disabled>{{ __("Delete") }}</button>
+               <button type="button" name="button" class="btn-button disable-taxonomy btn-normal" disabled>{{ __("Disable") }}</button><button type="button" name="button" class="btn-button btn-dangerous delete-taxonomy" data-termid="{{ $term->id }}">{{ __("Delete") }}</button>
              </div>
            </li>
            @endforeach

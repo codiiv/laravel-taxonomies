@@ -38,13 +38,20 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
 
          $view->with('Taxonomy', $theTaxs);
-
-         // $sortedList = $common::getTermsSorted($taxonomy);
-         //
-
-
-
          $view->with('common', new Models\Common());
+
+         //****************** We check a term ID has been given ***********
+         if(isset($_GET['term_id']) && $theTaxs::where('id', $_GET['term_id'])->exists()){
+           $dis = Models\Taxonomies::where('id', $_GET['term_id'])->first();
+           $directParent = $dis->parent_id;
+           $view->with('term_exists', true);
+           $view->with('term_id', $_GET['term_id']);
+           $view->with('the_term', $dis);
+         }else{
+           $view->with('term_exists', false);
+         }
+
+
          $view->with('taxonomiesPath', \Config::get('taxonomies.taxonomy_path'));
 
          if(isset($_GET['taxonomy'])){
