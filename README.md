@@ -1,4 +1,4 @@
-# Laravel Forum Package - Chatter
+# Laravel Taxonomies (Like Wordpress) package - Taxonomies
 
 ### I ===================  INSTALLATION =======================
 
@@ -86,13 +86,13 @@ Coming soon
 DROPDOWN 
 ```$Taxonomy  and $taxonomy``` are set  globally via the service provider. ```$Taxonomy``` is the DB object while the ```$taxonomy``` is set by the <strong>taxonomy</strong> query string parameter or lack thereof, in which case the default  taxonomy is picked up
 
-``` <?php $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []); ?> ```
+``` <?php $terms = $Taxonomy::sortedTerms($taxonomy, null, 0, []); ?> ```
 
 ``` 
     <select class="parent" name="parent">
        <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
-       @foreach($taxs as $key => $tax)
-          <option value="{{ $tax->id }}" class="level-{{ $tax->level }}">{{ $tax->pointer.' '.$tax->name }}</option>
+       @foreach($terms as $key => $term)
+          <option value="{{ $term->id }}" class="level-{{ $term->level }}">{{ $term->pointer.' '.$term->name }}</option>
        @endforeach
     </select>
 ```
