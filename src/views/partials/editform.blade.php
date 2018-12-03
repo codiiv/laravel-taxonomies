@@ -9,7 +9,7 @@
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
   <fieldset>
-    <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="{{ $the_term->name }}" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
+    <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="{{ $the_term->name }}" placeholder="{{ $taxonomies[$taxonomy]['singular_name'] }} name" required="">
   </fieldset>
   <fieldset>
     <label for="slug">{{ __("Slug") }}</label><input type="text" name="slug" value="{{ $the_term->slug }}" readonly required="">
