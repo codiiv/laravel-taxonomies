@@ -9,9 +9,6 @@
         "laravel tags",
         "laravel locations"
     ],
-    "require-dev": {
-        "codiiv/extrameta": "dev-master"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -36,6 +33,7 @@
         "laravel/framework": "5.7.*"
       },
       "require-dev": {
-          "laravel/laravel": "5.7."
+          "laravel/laravel": "5.7.",
+          "codiiv/extrameta": "dev-master"
     }
 }
