@@ -18,8 +18,14 @@
     ```
     Codiiv\Taxonomies\TaxonomiesServiceProvider::class,
     ```
+3. Now that we have published a few new files to our application we need to reload them with the following command:
 
-3. Publish the Vendor Assets files by running:
+    ```
+    composer dump-autoload
+    ```
+
+
+4. Publish the Vendor Assets files by running:
 
     ```
     php artisan vendor:publish --provider="Codiiv\Taxonomies\TaxonomiesServiceProvider"
@@ -30,13 +36,6 @@
 
     To set up the taxonomies path, edit the file accordingly.
 
-
-4. Now that we have published a few new files to our application we need to reload them with the following command:
-
-    ```
-    composer dump-autoload
-    ```
-
 5. Run Your migrations:
 
     ```
@@ -46,6 +45,7 @@
 
     Quick tip: Make sure that you've created a database and added your database credentials in your `.env` file.
 
+
 6. Lastly, CONFIGURE SUPER ADMIN account.
 
     Run this command `php artisan taxonomies:superadmin someemail@somedomain.tld `  <strong>replacing someemail@somedomain.tld </strong> by the email of the user you want to set  as super admin. Note that you can only have one super admin.
@@ -54,7 +54,7 @@
 
   After running the ``` vendor:publish --force ``` command
 
-Now, visit your ``` site.com/chatteradmin ``` and you should see your new forum admin once logged in!
+Now, visit your ``` site.com/dashboard/taxonomies ``` and you should see your new forum admin once logged in!
 
 ### II  ======================= UPGRADING  =======================
 
