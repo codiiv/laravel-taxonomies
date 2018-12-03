@@ -2,7 +2,7 @@
 fieldset {padding: 1rem !important;}
 fieldset input[type="text"] {border: none;padding: 0.60rem;border-radius: 0.2rem;width: 60%;box-shadow: 0 0 8px #ccc;}
 fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block;}
-.button--filled.button--primary {border: none;background: #0f40fe;color: #fff;padding: 1rem;font-size: 1.6rem;border-radius: 0.2rem;width: 20rem;display: block;margin: 2rem auto 0;cursor: pointer;}
+.button--filled.button--primary {border: none;background: #0f40fe;color: #fff;padding: 0rem;font-size: 1.6rem;border-radius: 0.2rem;width: 20rem;display: block;margin: 2rem auto 0;cursor: pointer;}
 .button--filled.button--primary:hover {background: #6b9cff;}
 .taxonomies-menu li {list-style: none;display: inline-block;vertical-align: middle;text-align: center;}
 .taxonomies-menu li a{display: block; margin: auto;padding: 0.75rem; }
@@ -18,7 +18,7 @@ fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block;}
 /* .the-items li:hover ::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%} */
 .btn-button {display: inline-block;vertical-align: middle;border: none;margin-right: 0.5rem;padding: 0.3rem 2rem;border-radius: 0.2rem; cursor: pointer;box-shadow: 0px 0px 4px #3A3A3A;}
 .tax-color {width: 1.5rem;height: 1.5rem;display: inline-block;vertical-align: middle;border-radius: 1rem;}
-.the-items li a {display: block;}
+.the-items li a {display: block;text-decoration: none;color: #5687fc;}
 .taxonomies-actions {display: block; width: 100%}
 .theslug {position: absolute;right: 0;font-size: 0.8rem;text-transform: lowercase;color: #57575B;top: 0;z-index: 1;}
 @media only screen and (min-width: 37.5em){
