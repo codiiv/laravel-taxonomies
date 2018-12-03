@@ -24,8 +24,8 @@ class TaxonomiesServiceProvider extends ServiceProvider
         __DIR__.'/public' => public_path('taxonomies/assets'),
       ]);
       $this->publishes([
-          __DIR__.'/database/seeds/' => database_path('seeds'),
-      ], 'projectmgr_seeds');
+          __DIR__.'/database/' => database_path(),
+      ], 'taxonomies');
       $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
       /************************  TO VIEWS ***************************/
