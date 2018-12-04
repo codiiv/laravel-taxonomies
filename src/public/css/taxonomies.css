@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 .taxonomies-main *{margin: 0; padding: 0, letter-spacing: 0;}
+=======
+<<<<<<< refs/remotes/laravel-taxonomies/1.0
+.taxonomies-main *{margin: 0; padding: 0; letter-spacing: 0;}
+=======
+.taxonomies-main *{margin: 0; padding: 0, letter-spacing: 0;}
+>>>>>>> add letter-spacing
+>>>>>>> 1.0
 fieldset {padding: 1rem !important;}
 fieldset input[type="text"] {border: none;padding: 0.60rem;border-radius: 0.2rem;width: 60%;box-shadow: 0 0 8px #ccc;}
 fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block; letter-spacing:0rem}
