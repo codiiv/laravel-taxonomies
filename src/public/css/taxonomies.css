@@ -21,6 +21,7 @@ fieldset label{ width: 39.95%; vertical-align: middle; display: inline-block; le
 .the-items li a {display: block;text-decoration: none;color: #5687fc;}
 .taxonomies-actions {display: block; width: 100%}
 .theslug {position: absolute;right: 0;font-size: 0.8rem;text-transform: lowercase;color: #57575B;top: 0;z-index: 1;}
+.the-items li * {letter-spacing: 0;}
 @media only screen and (min-width: 37.5em){
   .grid__column--6 {width: 50%;display: inline-block;vertical-align: top;}
   fieldset label {vertical-align: middle;display: inline-block;}
