@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+
 class TaxonomiesServiceProvider extends ServiceProvider
 {
     /**
@@ -33,9 +34,10 @@ class TaxonomiesServiceProvider extends ServiceProvider
       view()->composer('*', function ($view){
        $request =  Request();
        if(\Auth::check()) {
-         $theTaxs = new Models\Taxonomies();
-         $custom = new Models\Custom();
-         $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+
+         $theTaxs   = new Models\Taxonomies();
+         $custom    = new Models\Custom();
+         $taxonomy  = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
 
          $view->with('Taxonomy', $theTaxs);
          $view->with('common', new Models\Common());
@@ -90,5 +92,15 @@ class TaxonomiesServiceProvider extends ServiceProvider
       $this->commands([
         Console\Commands\AssignSuperadmin::class
       ]);
+
+
+
+      // $this->app->register(\Codiiv\Extrameta\ExtrametaServiceProvider::class);
+      // $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+      // $loader->alias('Form', '\Collective\Html\FormFacade');
+
+      $this->app->bind('Codiiv\Extrameta\Models\Usermeta', function ($app) {
+        return new Usermeta();
+      });
     }
 }
