@@ -58,23 +58,20 @@ class TaxonomiesServiceProvider extends ServiceProvider
 
          if(isset($_GET['taxonomy'])){
            $collection = collect($theTaxs::sortedTerms($_GET['taxonomy'], null, 0, []));
-
          }else{
            $defaultCat = \Config::get('taxonomies.default_taxonomy');
            $collection = collect($theTaxs::sortedTerms($defaultCat, null, 0, []));
          }
          $view->with('taxonomy', $taxonomy);
-
          $view -> with('taxonomies', $custom::Taxonomies());
-
          $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
          $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
 
          $itemsPerPage = \Config::get('taxonomies.terms_per_page');
          $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
          $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
          $view->with('paginatedTerms', $paginatedTerms);
+         $view->with('unique_to', '');
        };
       });
     }
@@ -93,14 +90,10 @@ class TaxonomiesServiceProvider extends ServiceProvider
         Console\Commands\AssignSuperadmin::class
       ]);
 
-
-
       // $this->app->register(\Codiiv\Extrameta\ExtrametaServiceProvider::class);
       // $loader = \Illuminate\Foundation\AliasLoader::getInstance();
       // $loader->alias('Form', '\Collective\Html\FormFacade');
 
-      $this->app->bind('Codiiv\Extrameta\Models\Usermeta', function ($app) {
-        return new Usermeta();
-      });
+
     }
 }

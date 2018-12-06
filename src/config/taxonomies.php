@@ -1,7 +1,29 @@
 <?php
 return [
   "taxonomy_path"      => "/dashboard/taxonomies",
+  /*
+  |--------------------------------------------------------------------------
+  | master_file_extend
+  |--------------------------------------------------------------------------
+  | Usually extends the default Laravel layout file. However, you can specify
+  | another file to extend. e.g you can extend another package's main layout
+  | file like  mypackage::layouts.app (depending on its views are)
+  */
   "master_file_extend" => "layouts.app",
+  /*
+  |--------------------------------------------------------------------------
+  | specify_unique_to
+  |--------------------------------------------------------------------------
+  | There is a nullable column named "unique_to". This can be enabled by changing
+  | this parameter to true. This functionality comes in handy for instances when
+  | you have multiple taxonomies, but want to separate them by a third party entity.
+  * For instance you may want to create a taxonomy like category, and make it different
+  * by project specified by a unique slug.
+  * If this is true, you need to specify a unique_to field (usually input type hidden)
+  * to make this term unique to. For instance, a company slug,a post type,...
+  * WE'll make more documentation about this
+  */
+  "specify_unique_to" => false,
 
   /*
   |--------------------------------------------------------------------------

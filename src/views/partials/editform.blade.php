@@ -8,12 +8,19 @@
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
+  @if(Config::get('taxonomies.specify_unique_to'))
+    <input type="hidden" name="unique_to" value="{{ $unique_to }}">
+  @endif
   <fieldset>
     <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="{{ $the_term->name }}" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
   </fieldset>
   <fieldset>
     <label for="slug">{{ __("Slug") }}</label><input type="text" name="slug" value="{{ $the_term->slug }}" readonly required="">
   </fieldset>
+
+
+  <!-- specify_unique_to -->
+
   <fieldset>
     <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
           <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
