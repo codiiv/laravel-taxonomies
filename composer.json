@@ -34,6 +34,6 @@
         "codiiv/extrameta": "dev-master"
       },
       "require-dev": {
-          "laravel/laravel": "5.7."
+          "laravel/laravel": "5.7.*"
     }
 }
