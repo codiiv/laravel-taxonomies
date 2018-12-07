@@ -7,15 +7,17 @@
 @section('content')
 <div class="taxonomies-main">
   @include('taxonomies::partials.taxonomymenu')
-
+  <?php
+    $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
+  ?>
   <div class="grid">
      <div class="grid__column grid__column--6 grid__column--#--sm ">
        <div class="cat-list-inner">
 
          @if($term_exists)
-            @include('taxonomies::partials.editform')
+            @include('taxonomies::partials.editform', ['taxs', $taxs])
          @else
-            @include('taxonomies::partials.newform')
+            @include('taxonomies::partials.newform', ['taxs', $taxs])
          @endif
 
        </div>
