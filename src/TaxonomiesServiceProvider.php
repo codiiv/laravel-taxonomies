@@ -72,6 +72,8 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
          $view->with('paginatedTerms', $paginatedTerms);
          $view->with('unique_to', '');
+
+         $view->with('taxs',$theTaxs::sortedTerms($taxonomy, null, 0, []));
        };
       });
     }

@@ -69,6 +69,7 @@ class TaxonomiesController extends Controller
         $taxSlug = $taxSlug.'-1';
       }
     }
+    $back_to =  $request ->back_to;
     $tax->parent_id = $request->parent != "" ? $request->parent :  null;
     $tax->name      = $request->name;
     $tax->color     = '#'.$request->color;
@@ -85,7 +86,7 @@ class TaxonomiesController extends Controller
       $msgtype = 1;
     }
     $taxonomiesPath = \Config::get('taxonomies.taxonomy_path');
-    return redirect($taxonomiesPath.'?taxonomy='.$tax->taxonomy.($pageNumber > 1 ? '&page='.$pageNumber : ''))->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype]);
+    return redirect($back_to)->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype]);
   }
   /*
   | Method : updateTaxonomy
@@ -97,18 +98,23 @@ class TaxonomiesController extends Controller
     $taxonomy  = $request->taxonomy;
     $term_id  = $request->term_id;
     $page     = isset($request->page)? $request->page : false;
-    $taxSlug = $request->slug;
-    for ($i=0; $i < 10; $i++) {
-      if($tax::where('slug', $taxSlug)->exists()){
-        $taxSlug = $taxSlug.'-1';
-      }
-    }
+
+    $back_to =  $request ->back_to;
 
     /*
      | We make sure that term exits
      | in that taxonomy. OtherWise we prevent the action and pass a warning
      */
     if($tax::where('id', $term_id)->where('taxonomy', $taxonomy)->exists()){
+
+      $taxSlug = $request->slug;
+
+      for ($i=0; $i < 10; $i++) {
+        if($tax::where('slug', $taxSlug)->exists()){
+          $taxSlug = $taxSlug;
+        }
+      }
+
       // We update the  record as needed
      $updateTerm = Taxonomies::where('id', $term_id)
      ->update([
@@ -132,7 +138,7 @@ class TaxonomiesController extends Controller
     }
 
     $taxonomiesPath = \Config::get('taxonomies.taxonomy_path');
-    return redirect($taxonomiesPath.'?taxonomy='.$taxonomy.'&term_id='.$term_id.($page ? '&page='.$page : ''))->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype, "action_type"=>"update"]);
+    return redirect($back_to)->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype, "action_type"=>"update"]);
   }
   public function deleteTaxonomy(Request $request){
     $page     = isset($request->page) ?  $request->page : false;

@@ -7,9 +7,7 @@
 @section('content')
 <div class="taxonomies-main">
   @include('taxonomies::partials.taxonomymenu')
-  <?php
-    $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
-  ?>
+
   <div class="grid">
      <div class="grid__column grid__column--6 grid__column--#--sm ">
        <div class="cat-list-inner">
@@ -33,7 +31,6 @@
 
 
 @section(Config::get('taxonomies.yields.footer'))
-
 <script src="{{ url('/taxonomies/assets/js/jscolor.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="{{ url('/taxonomies/assets/js/taxonomies.js') }}"></script>

@@ -4,6 +4,7 @@
 <form class="new-tax-form" action="{{ $taxonomiesPath.'/update/taxonomy' }}" method="post">
   @csrf
   <input type="hidden" name="taxonomy" value="{{ $taxonomy }}">
+  <input type="hidden" name="back_to" value="{{ url()->full() }}">
   <input type="hidden" name="term_id" value="{{ $the_term->id }}">
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
