@@ -74,7 +74,6 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $view->with('paginatedTerms', $paginatedTerms);
          $view->with('unique_to', '');
 
-         $view->with('taxs',$theTaxs::sortedTerms($taxonomy, null, 0, []));
        };
       });
     }
