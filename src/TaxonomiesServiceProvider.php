@@ -69,7 +69,8 @@ class TaxonomiesServiceProvider extends ServiceProvider
 
          $itemsPerPage = \Config::get('taxonomies.terms_per_page');
          $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
-         $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+         // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+         $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
          $view->with('paginatedTerms', $paginatedTerms);
          $view->with('unique_to', '');
 

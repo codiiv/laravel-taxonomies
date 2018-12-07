@@ -22,22 +22,29 @@ class Taxonomies extends Model
       $kids = Taxonomies::where('parent_id',$parent)->get();
       return $kids;
     }
-    static public function sortedTerms($taxonomy, $parentID = null, $level=0, $list=array()){
+    static public function sortedTerms($taxonomy, $parentID = null, $level=0, $list=[], $unique_to=''){
       $pointer = '';
       for ($i=0; $i < $level; $i++) {
         $pointer = $pointer.\Config::get('taxonomies.default_pointer_sign');
       }
-
-      if($level==0){
-        $terms = Taxonomies::whereNull('parent_id')->where("taxonomy", $taxonomy)->with('children')->get();
+      if(isset($unique_to)){
+        if($level==0){
+          $terms = Taxonomies::whereNull('parent_id')->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->get();
+        }else{
+          $terms = Taxonomies::where("parent_id", $parentID)->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->get();
+        }
       }else{
-        $terms = Taxonomies::where("parent_id", $parentID)->where("taxonomy", $taxonomy)->with('children')->get();
+        if($level==0){
+          $terms = Taxonomies::whereNull('parent_id')->where("taxonomy", $taxonomy)->with('children')->get();
+        }else{
+          $terms = Taxonomies::where("parent_id", $parentID)->where("taxonomy", $taxonomy)->with('children')->get();
+        }
       }
       foreach ($terms as $k => $t) {
         $t->level   = $level;
         $t->pointer = $pointer;
         $list[] = $t;
-        $list   = self::sortedTerms($taxonomy, $t->id, $level+1, $list);
+        $list   = self::sortedTerms($taxonomy, $t->id, $level+1, $list, $unique_to);
       }
       return $list;
     }
@@ -89,6 +96,7 @@ class Taxonomies extends Model
 
       return $xhtml;
     }
+    
     static public function listCategories(){
       $forumCategories = Taxonomies::whereNull('parent_id')->with('children')->get();
       $tree = '<ul>';

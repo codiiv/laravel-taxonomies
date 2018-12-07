@@ -1,3 +1,6 @@
+<?php
+  $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
+?>
 <div class="add-header">
 
 </div>
@@ -11,6 +14,7 @@
   @if(Config::get('taxonomies.specify_unique_to'))
     <input type="hidden" name="unique_to" value="{{ $unique_to }}">
   @endif
+
   <fieldset>
     <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
   </fieldset>

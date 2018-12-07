@@ -1,3 +1,6 @@
+<?php
+  $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
+?>
 <div class="add-header">
 
 </div>
