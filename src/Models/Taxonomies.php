@@ -62,7 +62,6 @@ class Taxonomies extends Model
       // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
       $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
 
-
       return $paginatedTerms;
     }
     static public function taxonomyHtml($wrappers=['', '<ul>','</ul>'], $taxonomy, $parentID=null, $level = 0){

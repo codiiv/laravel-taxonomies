@@ -1,6 +1,6 @@
 <?php
 $unique_to = isset($unique_to) ? $unique_to : '';
-$toParse = $Taxonomy::loadUnique($taxonomy, $unique_to, $page);
+$toParse = \Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
 
 ?>
 <ul class="the-items">

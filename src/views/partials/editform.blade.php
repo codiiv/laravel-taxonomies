@@ -1,3 +1,6 @@
+<?php
+$unique_to = isset($unique_to) ? $unique_to : '';
+?>
 <div class="add-header">
 
 </div>
@@ -9,7 +12,7 @@
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
-  @if(Config::get('taxonomies.specify_unique_to'))
+  @if(Config::get('taxonomies.specify_unique_to') && isset($unique_to))
     <input type="hidden" name="unique_to" value="{{ $unique_to }}">
   @endif
   <fieldset>

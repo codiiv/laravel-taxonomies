@@ -15,9 +15,9 @@
        <div class="cat-list-inner">
 
          @if($term_exists)
-            @include('taxonomies::partials.editform', ['taxs'=> $taxs])
+            @include('taxonomies::partials.editform', ['taxs' => $taxs])
          @else
-            @include('taxonomies::partials.newform', ['taxs'=> $taxs])
+            @include('taxonomies::partials.newform', ['taxs' => $taxs])
          @endif
 
        </div>

@@ -90,13 +90,13 @@ class TaxonomiesController extends Controller
       }
     }
     $back_to =  $request ->back_to;
-    $unique_to =  $request ->unique_to;
     $tax->parent_id = $request->parent != "" ? $request->parent :  null;
     $tax->name      = $request->name;
     $tax->color     = '#'.$request->color;
     $tax->taxonomy  = $request->taxonomy;
     $tax->slug      = $taxSlug;
     $tax->description  = $request->description != "" ? $request->description : " ";
+    $tax->unique_to =  $request->unique_to;
     $tax->save();
     $taxId = $tax->id;
     if($taxId){
@@ -144,7 +144,7 @@ class TaxonomiesController extends Controller
            'name' => $request->name,
            'color' => '#'.$request->color,
            'slug' => $taxSlug,
-           'unique_to'=>$unique_to, 
+           'unique_to'=>$unique_to,
            'description' => $request->description != "" ? $request->description : " ",
            ]);
 
