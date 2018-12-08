@@ -15,15 +15,15 @@
        <div class="cat-list-inner">
 
          @if($term_exists)
-            @include('taxonomies::partials.editform', ['taxs' => $taxs, 'unique_to' => 'tested'])
+            @include('taxonomies::partials.editform', ['taxs' => $taxs])
          @else
-            @include('taxonomies::partials.newform', ['taxs' => $taxs, 'unique_to' => 'tested'])
+            @include('taxonomies::partials.newform', ['taxs' => $taxs])
          @endif
 
        </div>
      </div><div class="grid__column grid__column--6 grid__column--#--md ">
        <div class="inner-ul-li">
-        @include('taxonomies::partials.list-items',['unique_to' => 'tested'])
+        @include('taxonomies::partials.list-items'])
        </div>
      </div>
  </div>
