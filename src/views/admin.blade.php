@@ -9,7 +9,6 @@
   @include('taxonomies::partials.taxonomymenu')
   <?php
     $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, []);
-    $unique_to = '';
   ?>
   <div class="grid">
      <div class="grid__column grid__column--6 grid__column--#--sm ">

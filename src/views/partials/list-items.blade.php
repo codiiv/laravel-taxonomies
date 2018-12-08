@@ -8,9 +8,10 @@ $toParse = $Taxonomy::loadUnique($taxonomy, $unique_to, $page);
     <input type="hidden" name="_token" value="{{ csrf_token() }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
     <input type="hidden" name="tobedeleted" value=""> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
     <input type="hidden" name="taxonomy" value="{{ $taxonomy }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
-    <?php if(isset($_GET['page'])){ ?>
-      <input type="hidden" name="page" value="{{ $_GET['page'] }}">
-    <?php } ?>
+  <?php if(isset($_GET['page'])){ ?>
+    <input type="hidden" name="page" value="{{ $_GET['page'] }}">
+  <?php } ?>
+    <input type="hidden" name="unique_to" value="{{ $unique_to }}">
 
   </form>
 

@@ -90,6 +90,7 @@ class TaxonomiesController extends Controller
       }
     }
     $back_to =  $request ->back_to;
+    $unique_to =  $request ->unique_to;
     $tax->parent_id = $request->parent != "" ? $request->parent :  null;
     $tax->name      = $request->name;
     $tax->color     = '#'.$request->color;
@@ -128,6 +129,7 @@ class TaxonomiesController extends Controller
     if($tax::where('id', $term_id)->where('taxonomy', $taxonomy)->exists()){
 
       $taxSlug = $request->slug;
+      $unique_to =  $request ->unique_to;
 
       for ($i=0; $i < 10; $i++) {
         if($tax::where('slug', $taxSlug)->exists()){
@@ -142,6 +144,7 @@ class TaxonomiesController extends Controller
            'name' => $request->name,
            'color' => '#'.$request->color,
            'slug' => $taxSlug,
+           'unique_to'=>$unique_to, 
            'description' => $request->description != "" ? $request->description : " ",
            ]);
 
