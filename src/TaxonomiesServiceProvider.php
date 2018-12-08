@@ -62,17 +62,13 @@ class TaxonomiesServiceProvider extends ServiceProvider
            $defaultCat = \Config::get('taxonomies.default_taxonomy');
            $collection = collect($theTaxs::sortedTerms($defaultCat, null, 0, []));
          }
-         $view->with('taxonomy', $taxonomy);
-         $view -> with('taxonomies', $custom::Taxonomies());
-         $page = isset($_GET['page']) ? $_GET['page'] : 1;
-         $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+         // $page = isset($_GET['page']) ? $_GET['page'] : 1;
+         // $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
 
-         $itemsPerPage = \Config::get('taxonomies.terms_per_page');
-         $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
-         // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
-         $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
-         $view->with('paginatedTerms', $paginatedTerms);
-         $view->with('unique_to', '');
+
+         $view -> with('taxonomy', $taxonomy);
+         $view -> with('page', isset($_GET['page']) ? $_GET['page'] : 1);
+         $view -> with('taxonomies', $custom::Taxonomies());
        };
       });
     }
@@ -90,7 +86,9 @@ class TaxonomiesServiceProvider extends ServiceProvider
       $this->commands([
         Console\Commands\AssignSuperadmin::class
       ]);
-
+      $this->mergeConfigFrom(
+          __DIR__.'/config/taxonomies.php', 'taxonomies'
+      );
       // $this->app->register(\Codiiv\Extrameta\ExtrametaServiceProvider::class);
       // $loader = \Illuminate\Foundation\AliasLoader::getInstance();
       // $loader->alias('Form', '\Collective\Html\FormFacade');

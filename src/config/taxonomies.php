@@ -71,6 +71,6 @@ return [
   |The default taxonomy. This can be defined or changed as needed.
   |
   */
-  'default_pointer_sign' => '—',
+  'default_pointer_sign' => ' ➤ ',
 
 ];

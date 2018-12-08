@@ -3,6 +3,8 @@
 namespace Codiiv\Taxonomies\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Taxonomies extends Model
 {
@@ -22,6 +24,7 @@ class Taxonomies extends Model
       $kids = Taxonomies::where('parent_id',$parent)->get();
       return $kids;
     }
+
     static public function sortedTerms($taxonomy, $parentID = null, $level=0, $list=[], $unique_to=''){
       $pointer = '';
       for ($i=0; $i < $level; $i++) {
@@ -47,6 +50,20 @@ class Taxonomies extends Model
         $list   = self::sortedTerms($taxonomy, $t->id, $level+1, $list, $unique_to);
       }
       return $list;
+    }
+    static public function loadUnique($taxonomy, $unique_to='', $page=1){
+
+      $itemsPerPage = \Config::get('taxonomies.terms_per_page');
+      $defaultTax   = \Config::get('taxonomies.default_taxonomy');
+
+      $collection = collect(Taxonomies::sortedTerms($taxonomy, null, 0, [], $unique_to));
+
+      $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
+      // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+      $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
+
+
+      return $paginatedTerms;
     }
     static public function taxonomyHtml($wrappers=['', '<ul>','</ul>'], $taxonomy, $parentID=null, $level = 0){
       $pointer = '';
@@ -96,7 +113,7 @@ class Taxonomies extends Model
 
       return $xhtml;
     }
-    
+
     static public function listCategories(){
       $forumCategories = Taxonomies::whereNull('parent_id')->with('children')->get();
       $tree = '<ul>';

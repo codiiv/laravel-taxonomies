@@ -1,3 +1,8 @@
+<?php
+$unique_to = isset($unique_to) ? $unique_to : '';
+$toParse = $Taxonomy::loadUnique($taxonomy, $unique_to, $page);
+
+?>
 <ul class="the-items">
   <form class="delete-taxonomy-term" action="{{ url( \Config::get('taxonomies.taxonomy_path').'/delete/taxonomy' ) }}" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}"> <?php //<meta name="csrf-token" content="{{ csrf_token() }}"> ?>
@@ -6,8 +11,10 @@
     <?php if(isset($_GET['page'])){ ?>
       <input type="hidden" name="page" value="{{ $_GET['page'] }}">
     <?php } ?>
+
   </form>
-  @foreach($paginatedTerms as $key => $term )
+
+  @foreach($toParse as $key => $term )
   <li data-value="{{ $term->id }}" class="level-{{ $term->level }} @if((isset($term_exists) && $term_exists) && $the_term->id == $term->id) beingedited @endif">
     <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}<?php if(isset($_GET['page'])) echo '&page='.$_GET['page']; ?>"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }} <span class="theslug">[ {{ $term->slug }} ]</span></a>
     <div class="taxonomies-actions" style="display:none">
@@ -17,5 +24,5 @@
   @endforeach
 </ul>
 <div class="pagination-container">
-  {{ $paginatedTerms->links() }}
+  {{ $toParse->links() }}
 </div>

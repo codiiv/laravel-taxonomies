@@ -5,6 +5,9 @@ namespace Codiiv\Taxonomies\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use Codiiv\Taxonomies\Models\Taxonomies;
 
 class TaxonomiesController extends Controller
@@ -50,8 +53,25 @@ class TaxonomiesController extends Controller
 
   ]
    */
-  public function loadIndex(){
-    return view("taxonomies::admin");
+
+  public function loadIndex(Request $request){
+
+    $itemsPerPage = \Config::get('taxonomies.terms_per_page');
+    $defaultTax   = \Config::get('taxonomies.default_taxonomy');
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $taxonomy = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
+
+    if(isset($_GET['taxonomy'])){
+      $collection = collect(Taxonomies::sortedTerms($_GET['taxonomy'], null, 0, []));
+    }else{
+      $collection = collect(Taxonomies::sortedTerms($defaultTax, null, 0, []));
+    }
+
+    $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
+    // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+    $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
+
+    return view("taxonomies::admin", ['paginatedTerms' => $paginatedTerms]);
   }
 
   public function newTaxonomy(Request $request){
