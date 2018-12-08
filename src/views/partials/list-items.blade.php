@@ -17,7 +17,7 @@ $toParse = \Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_t
 
   @foreach($toParse as $key => $term )
   <li data-value="{{ $term->id }}" class="level-{{ $term->level }} @if((isset($term_exists) && $term_exists) && $the_term->id == $term->id) beingedited @endif">
-    <a href="{{ url(Config::get('taxonomies.taxonomy_path')).'?taxonomy='.$taxonomy.'&term_id='.$term->id }}<?php if(isset($_GET['page'])) echo '&page='.$_GET['page']; ?>"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }} <span class="theslug">[ {{ $term->slug }} ]</span></a>
+    <a href="{{ url()->current().'?taxonomy='.$taxonomy.'&term_id='.$term->id }}<?php if(isset($_GET['page'])) echo '&page='.$_GET['page']; ?>"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }} <span class="theslug">[ {{ $term->slug }} ]</span></a>
     <div class="taxonomies-actions" style="display:none">
       <button type="button" name="button" class="btn-button disable-taxonomy btn-normal" disabled>{{ __("Disable") }}</button><button type="button" name="button" class="btn-button btn-dangerous delete-taxonomy" data-termid="{{ $term->id }}">{{ __("Delete") }}</button>
     </div>
