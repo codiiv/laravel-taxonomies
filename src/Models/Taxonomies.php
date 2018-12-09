@@ -30,7 +30,7 @@ class Taxonomies extends Model
       for ($i=0; $i < $level; $i++) {
         $pointer = $pointer.\Config::get('taxonomies.default_pointer_sign');
       }
-      if(isset($unique_to)){
+      if($unique_to!=""){
         if($level==0){
           $terms = Taxonomies::whereNull('parent_id')->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->get();
         }else{
@@ -50,6 +50,19 @@ class Taxonomies extends Model
         $list   = self::sortedTerms($taxonomy, $t->id, $level+1, $list, $unique_to);
       }
       return $list;
+    }
+    static public function sortedTermsPaginated($taxonomy, $page=1){
+
+      $itemsPerPage = \Config::get('taxonomies.terms_per_page');
+      $defaultTax   = \Config::get('taxonomies.default_taxonomy');
+
+      $collection = collect(Taxonomies::sortedTerms($taxonomy, null, 0, []));
+
+      $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
+      // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
+      $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
+
+      return $paginatedTerms;
     }
     static public function loadUnique($taxonomy, $unique_to='', $page=1){
 

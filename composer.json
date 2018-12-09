@@ -19,7 +19,10 @@
     "autoload": {
         "psr-4": {
           "Codiiv\\Taxonomies\\": "/src"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
       },
       "extra": {
           "laravel": {

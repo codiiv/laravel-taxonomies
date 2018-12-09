@@ -84,11 +84,19 @@ class TaxonomiesController extends Controller
     // $taxSlug = str_slug($request->name, '-');
     $page = isset($request->page) ? $request->page : false;
     $taxSlug = $request->slug;
-    for ($i=0; $i < 10; $i++) {
-      if($tax::where('slug', $taxSlug)->exists()){
-        $taxSlug = $taxSlug.'-1';
+      if($request->unique_to !=""){
+        for ($i=0; $i < 10; $i++) {
+          if($tax::where('slug', $taxSlug)->where('unique_to', $request->unique_to)->where('taxonomy', $request->taxonomy)->exists()){
+            $taxSlug = $taxSlug.'-1';
+          }
+        }
+      }else{
+        for ($i=0; $i < 10; $i++) {
+          if($tax::where('slug', $taxSlug)->exists()){
+            $taxSlug = $taxSlug.'-1';
+          }
+        }
       }
-    }
     $back_to =  $request ->back_to;
     $tax->parent_id = $request->parent != "" ? $request->parent :  null;
     $tax->name      = $request->name;

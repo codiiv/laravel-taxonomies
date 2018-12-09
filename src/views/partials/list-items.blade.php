@@ -1,7 +1,11 @@
 <?php
 $unique_to = isset($unique_to) ? $unique_to : '';
-$toParse = \Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
-
+if($unique_to){
+  $toParse = \Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
+}else{
+  $page = isset($_GET['page']) ? $_GET['page'] : 1;
+  $toParse = $Taxonomy::sortedTermsPaginated($taxonomy, $page);
+}
 ?>
 <ul class="the-items">
   <form class="delete-taxonomy-term" action="{{ url( \Config::get('taxonomies.taxonomy_path').'/delete/taxonomy' ) }}" method="post">
