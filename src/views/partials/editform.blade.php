@@ -19,7 +19,7 @@ $unique_to = isset($unique_to) ? $unique_to : '';
     <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="{{ $the_term->name }}" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
   </fieldset>
   <fieldset>
-    <label for="slug">{{ __("Slug") }}</label><input type="text" name="slug" value="{{ $the_term->slug }}" readonly required="">
+    <label for="slug">{{ __("Slug") }}</label><input type="text" name="slug" value="{{ $the_term->slug }}" required="" style="background-color:#efe">
   </fieldset>
 
 
