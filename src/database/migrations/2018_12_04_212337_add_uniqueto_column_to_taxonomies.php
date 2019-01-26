@@ -13,9 +13,11 @@ class AddUniquetoColumnToTaxonomies extends Migration
      */
     public function up()
     {
+      if (!Schema::hasColumn('taxonomies', 'unique_to')){
         Schema::table('taxonomies', function (Blueprint $table) {
           $table->string('unique_to')->after("description")->default('')->nullable()->comments('Usually an entity such as the company');
         });
+      }
     }
 
     /**
@@ -25,8 +27,10 @@ class AddUniquetoColumnToTaxonomies extends Migration
      */
     public function down()
     {
+      if (Schema::hasColumn('taxonomies', 'unique_to')){
         Schema::table('taxonomies', function (Blueprint $table) {
           $table->dropColumn('unique_to');
         });
+      }
     }
 }
