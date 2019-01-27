@@ -4,11 +4,11 @@
   <link href="{{ url('/taxonomies/assets/css/taxonomies.css') }}" rel="stylesheet">
 @endsection
 
-@section('content')
+@section(Config::get('taxonomies.yields.taxonomy_content'))
 <div class="taxonomies-main">
   @include('taxonomies::partials.taxonomymenu')
   <?php
-    $uniqueTo = 'tadaa';
+    $uniqueTo = '';
     $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, [], $uniqueTo);
   ?>
   <div class="grid">

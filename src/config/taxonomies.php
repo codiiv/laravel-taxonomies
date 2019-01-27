@@ -1,6 +1,6 @@
 <?php
 return [
-  "taxonomy_path"      => "/dashboard/taxonomies",
+  "taxonomy_path"      => "dashboard/taxonomies",
   /*
   |--------------------------------------------------------------------------
   | master_file_extend
@@ -46,6 +46,7 @@ return [
   'yields' => [
       'head'   => 'css',
       'footer' => 'js',
+      'taxonomy_content'=>'content'
   ],
   /*
   |--------------------------------------------------------------------------

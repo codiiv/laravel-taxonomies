@@ -1,7 +1,7 @@
 <?php
-$unique_to = isset($unique_to) ? $unique_to : '';
-if($unique_to){
-  $toParse = \Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
+// $unique_to = isset($unique_to) ? $unique_to : '';
+if(isset($unique_to)){
+  $toParse = Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
 }else{
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $toParse = $Taxonomy::sortedTermsPaginated($taxonomy, $page);
