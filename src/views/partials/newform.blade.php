@@ -2,9 +2,13 @@
 $unique_to = isset($unique_to) ? $unique_to : '';
 ?>
 <div class="add-header">
-
+  @if(isset($_GET['taxonomy']))
+    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $_GET['taxonomy'] }}">{{ __("Add new").' '.$taxonomies[$_GET['taxonomy']]['labels']['singular_name'] }}</a></div>
+  @else
+    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy=category"><i class="fa fa-plus"></i> {{ __("Add new category") }}</a></div>
+  @endif
 </div>
-<form class="new-tax-form" action="{{ $taxonomiesPath.'/new/taxonomy' }}" method="post">
+<form class="new-tax-form" action="/{{ $taxonomiesPath.'/new/taxonomy' }}" method="post">
   @csrf
   <input type="hidden" name="taxonomy" value="{{ $taxonomy }}">
   <input type="hidden" name="back_to" value="{{ url()->full() }}">
@@ -21,14 +25,18 @@ $unique_to = isset($unique_to) ? $unique_to : '';
   <fieldset>
     <label for="slug">{{ __("Slug") }}</label><input type="text" name="slug" value="" required="" style="background-color:#efe">
   </fieldset>
-  <fieldset>
-    <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
-          <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
-        @foreach($taxs as $key => $tax)
-          <option value="{{ $tax->id }}" class="level-{{ $tax->level }}">{{ $tax->pointer.' '.$tax->name }}</option>
-        @endforeach
-      </select>
-  </fieldset>
+
+  <?php if(Codiiv\Taxonomies\Models\Custom::Taxonomies()[$taxonomy]['hierarchical']): ?>
+    <fieldset>
+      <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
+            <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
+          @foreach($taxs as $key => $tax)
+            <option value="{{ $tax->id }}" class="level-{{ $tax->level }}">{{ $tax->pointer.' '.$tax->name }}</option>
+          @endforeach
+        </select>
+    </fieldset>
+  <?php endif; ?>
+
   <fieldset>
 
     <label for="name">{{ __("Color") }}</label><input type="text" class="jscolor" name="color" value="ab2567" required="" autocomplete="off" style="background-image: none; background-color: rgb(171, 37, 103); color: rgb(255, 255, 255);">

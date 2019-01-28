@@ -4,7 +4,7 @@ $unique_to = isset($unique_to) ? $unique_to : '';
 <div class="add-header">
 
 </div>
-<form class="new-tax-form" action="{{ $taxonomiesPath.'/update/taxonomy' }}" method="post">
+<form class="new-tax-form" action="/{{ $taxonomiesPath.'/update/taxonomy' }}" method="post">
   @csrf
   <input type="hidden" name="taxonomy" value="{{ $taxonomy }}">
   <input type="hidden" name="back_to" value="{{ url()->full() }}">
@@ -24,15 +24,17 @@ $unique_to = isset($unique_to) ? $unique_to : '';
 
 
   <!-- specify_unique_to -->
-
-  <fieldset>
-    <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
-          <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
+  <?php if(Codiiv\Taxonomies\Models\Custom::Taxonomies()[$taxonomy]['hierarchical']): ?>
+    <fieldset>
+      <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
+        <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
         @foreach($taxs as $key => $tax)
-          <option value="{{ $tax->id }}" class="level-{{ $tax->level }}" {{ $tax->id == $the_term -> parent_id ? 'selected':'' }}>{{ $tax->pointer.' '.$tax->name }}</option>
+        <option value="{{ $tax->id }}" class="level-{{ $tax->level }}" {{ $tax->id == $the_term -> parent_id ? 'selected':'' }}>{{ $tax->pointer.' '.$tax->name }}</option>
         @endforeach
       </select>
-  </fieldset>
+    </fieldset>
+  <?php endif; ?>
+
   <fieldset>
 
     <label for="name">{{ __("Color") }}</label><input type="text" class="jscolor" name="color" value="{{ $the_term ->color }}" required="" autocomplete="off" style="background-image: none; background-color: rgb(171, 37, 103); color: rgb(255, 255, 255);">
