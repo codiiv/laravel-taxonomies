@@ -67,11 +67,20 @@ return [
 
   /*
   |--------------------------------------------------------------------------
-  | DEFAULT TAXONOMY
+  | default_pointer_sign
   |--------------------------------------------------------------------------
-  |The default taxonomy. This can be defined or changed as needed.
+  |The default parent to child sign / divider.
   |
   */
   'default_pointer_sign' => ' ➤ ',
+
+  /*
+  |--------------------------------------------------------------------------
+  | unique_to_choises
+  |--------------------------------------------------------------------------
+  |An array of potentially "unique_to" values. This is rendered as dropdow menu
+  |if it is not empty
+  */
+  'unique_to_choises' => [],
 
 ];
