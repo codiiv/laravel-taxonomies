@@ -32,13 +32,13 @@ class Taxonomies extends Model
       }
       if($unique_to!=""){
         if($level==0){
-          $terms = Taxonomies::whereNull('parent_id')->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->paginate(\Config::get('taxonomies.terms_per_page'));
+          $terms = Taxonomies::whereNull('parent_id')->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->get();
         }else{
-          $terms = Taxonomies::where("parent_id", $parentID)->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->paginate(\Config::get('taxonomies.terms_per_page'));
+          $terms = Taxonomies::where("parent_id", $parentID)->where('unique_to', $unique_to)->where("taxonomy", $taxonomy)->with('children')->get();
         }
       }else{
         if($level==0){
-          $terms = Taxonomies::whereNull('parent_id')->where("taxonomy", $taxonomy)->with('children')->paginate(\Config::get('taxonomies.terms_per_page'));
+          $terms = Taxonomies::whereNull('parent_id')->where("taxonomy", $taxonomy)->with('children')->get();
         }else{
           $terms = Taxonomies::where("parent_id", $parentID)->where("taxonomy", $taxonomy)->with('children')->get();
         }
