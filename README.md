@@ -80,7 +80,7 @@ Coming soon
          </div>
 
 ```
-![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot2.png)
+![alt text](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot2.png)
 
 
 DROPDOWN 
@@ -96,7 +96,7 @@ DROPDOWN
        @endforeach
     </select>
 ```
-![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/dropdown.png)
+![alt text](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/dropdown.png)
 
 2. Configure Default Values
 
@@ -105,5 +105,5 @@ DROPDOWN
 
 ### IV  ======================= SCREENSHOTS  =======================
 
-![](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot1.png)
+![alt text](https://raw.githubusercontent.com/codiiv/laravel-taxonomies/master/screenshot1.png)
 
