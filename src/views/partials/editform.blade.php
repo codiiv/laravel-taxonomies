@@ -12,9 +12,7 @@ $unique_to = isset($unique_to) ? $unique_to : '';
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
-  @if(Config::get('taxonomies.specify_unique_to') && $unique_to!="")
-    <input type="hidden" name="unique_to" value="{{ $unique_to }}">
-  @endif
+  <input type="hidden" name="unique_to" value="{{ $unique_to }}">
   <fieldset>
     <label for="name">{{ __("Name") }}</label><input type="text" name="name" value="{{ $the_term->name }}" placeholder="{{ $taxonomies[$taxonomy]['labels']['singular_name'] }} name" required="">
   </fieldset>

@@ -69,6 +69,12 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $view -> with('taxonomy', $taxonomy);
          $view -> with('page', isset($_GET['page']) ? $_GET['page'] : 1);
          $view -> with('taxonomies', $custom::Taxonomies());
+         $unique = \Config::get('taxonomies.specify_unique_to');
+         if($unique && isset($_GET['unique_to'])){
+           $view -> with('unique_to', $_GET['unique_to'] );
+         }else{
+           $view -> with('unique_to', '' );
+         }
        };
       });
     }
