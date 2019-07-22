@@ -1,8 +1,11 @@
 <div class="add-header">
+  <?php
+    $uniqueTo = isset(\Request()->unique_to) && \Request()->unique_to != '' ? '&unique_to='.\Request()->unique_to : '';
+  ?>
   @if(isset($_GET['taxonomy']))
-    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $_GET['taxonomy'] }}">{{ __("Add new").' '.$taxonomies[$_GET['taxonomy']]['labels']['singular_name'] }}</a></div>
+    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $_GET['taxonomy'] }}{{ $uniqueTo }}">{{ __("Add new").' '.$taxonomies[$_GET['taxonomy']]['labels']['singular_name'] }}</a></div>
   @else
-    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy=category"><i class="fa fa-plus"></i> {{ __("Add new category") }}</a></div>
+    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy=category{{ $uniqueTo }}"><i class="fa fa-plus"></i> {{ __("Add new category") }}</a></div>
   @endif
 </div>
 <form class="new-tax-form" action="/{{ $taxonomiesPath.'/new/taxonomy' }}" method="post">
