@@ -1,6 +1,3 @@
-<?php
-$unique_to = isset($unique_to) ? $unique_to : '';
-?>
 <div class="add-header">
   @if(isset($_GET['taxonomy']))
     <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $_GET['taxonomy'] }}">{{ __("Add new").' '.$taxonomies[$_GET['taxonomy']]['labels']['singular_name'] }}</a></div>
@@ -15,7 +12,8 @@ $unique_to = isset($unique_to) ? $unique_to : '';
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
-  @if(Config::get('taxonomies.specify_unique_to') && $unique_to!="")
+
+  @if(Config::get('taxonomies.specify_unique_to') && \Request()->unique_to !="")
     <input type="hidden" name="unique_to" value="{{ $unique_to }}">
   @endif
 

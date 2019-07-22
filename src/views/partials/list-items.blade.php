@@ -1,7 +1,7 @@
 <?php
 // $unique_to = isset($unique_to) ? $unique_to : '';
-if(isset($unique_to)){
-  $toParse = Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, $unique_to, $page);
+if(isset(\Request()->unique_to) && \Request()->unique_to){
+  $toParse = Codiiv\Taxonomies\Models\Taxonomies::loadUnique($taxonomy, \Request()->unique_to, $page);
 }else{
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $toParse = $Taxonomy::sortedTermsPaginated($taxonomy, $page);
@@ -18,8 +18,9 @@ if(isset($unique_to)){
   <?php if(isset($_GET['page'])){ ?>
     <input type="hidden" name="page" value="{{ $_GET['page'] }}">
   <?php } ?>
-    <input type="hidden" name="unique_to" value="{{ $unique_to }}">
-
+  @if( Config::get('taxonomies.specify_unique_to') && \Request()->unique_to !="" )
+    <input type="hidden" name="unique_to" value="{{ \Request()->unique_to }}">
+  @endif
   </form>
 
   @foreach($toParse as $key => $term )
