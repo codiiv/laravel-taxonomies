@@ -14,7 +14,7 @@
   <?php } ?>
 
   @if(Config::get('taxonomies.specify_unique_to') && \Request()->unique_to !="")
-    <input type="hidden" name="unique_to" value="{{ $unique_to }}">
+    <input type="hidden" name="unique_to" value="{{ \Request()->unique_to }}">
   @endif
 
   <fieldset>

@@ -8,7 +8,7 @@
 <div class="taxonomies-main">
   @include('taxonomies::partials.taxonomymenu')
   <?php
-    $uniqueTo = '';
+    $uniqueTo = isset(\Request()->unique_to) ? \Request()->unique_to : '';
     $taxs = $Taxonomy::sortedTerms($taxonomy, null, 0, [], $uniqueTo);
   ?>
   <div class="grid">
