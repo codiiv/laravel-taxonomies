@@ -1,9 +1,10 @@
 <div class="add-header">
   <?php
     $uniqueTo = isset(\Request()->unique_to) && \Request()->unique_to != '' ? '&unique_to='.\Request()->unique_to : '';
+    $theTax   = isset(\Request()->taxonomy) ? \Request()->taxonomy : "category";
   ?>
-  @if(isset($_GET['taxonomy']))
-    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $_GET['taxonomy'] }}{{ $uniqueTo }}">{{ __("Add new").' '.$taxonomies[$_GET['taxonomy']]['labels']['singular_name'] }}</a></div>
+  @if(isset($theTax))
+    <div class="add-tax"><a href="{{ url()->current() }}?taxonomy={{ $theTax }}{{ $uniqueTo }}">{{ __("Add new").' '.$taxonomies[$theTax]['labels']['singular_name'] }}</a></div>
   @else
     <div class="add-tax"><a href="{{ url()->current() }}?taxonomy=category{{ $uniqueTo }}"><i class="fa fa-plus"></i> {{ __("Add new category") }}</a></div>
   @endif

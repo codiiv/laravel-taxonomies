@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Mail;
 class Custom
 {
    static public function Taxonomies(){
-     return [
+
+     $taxonomies = [];
+
+     $taxonomies = [
 
            "category"=>[
              'labels' => [
@@ -110,5 +113,10 @@ class Custom
            ],
 
          ];
+     include(base_path('bootstrap/custom_taxonomies.php'));
+
+     $full = array_merge($taxonomies, $extraTaxonomies);
+
+     return $full;
    }
 }
