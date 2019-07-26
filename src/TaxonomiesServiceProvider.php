@@ -22,6 +22,7 @@ class TaxonomiesServiceProvider extends ServiceProvider
       include __DIR__.'/Routes/web.php';
       $this->publishes([
         __DIR__.'/config/taxonomies.php' => config_path('taxonomies.php'),
+        __DIR__.'/config/custom_taxonomies.php' => base_path('bootstrap/custom_taxonomies.php'),
         __DIR__.'/public' => public_path('taxonomies/assets'),
       ]);
       // $this->publishes([
