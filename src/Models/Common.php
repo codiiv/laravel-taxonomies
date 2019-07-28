@@ -36,6 +36,9 @@ class Common
     }
     return $xhtml;
   }
+  static public function randomColor(){
+    return str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+  }
   static public function kidsOptionsUl($items, $level = 0){
     $pointer = '';
     for ($i=0; $i < $level; $i++) {
