@@ -41,7 +41,7 @@
 
   <fieldset>
 
-    <label for="name">{{ __("Color") }}</label><input type="text" class="jscolor" name="color" value="ab2567" required="" autocomplete="off" style="background-image: none; background-color: rgb(171, 37, 103); color: rgb(255, 255, 255);">
+    <label for="name">{{ __("Color") }}</label><input type="text" class="jscolor" name="color" value="{{ $commonx::randomColor() }}" required="" autocomplete="off" style="background-image: none; background-color: rgb(171, 37, 103); color: rgb(255, 255, 255);">
 
     <script>
     function setTextColor(picker) {

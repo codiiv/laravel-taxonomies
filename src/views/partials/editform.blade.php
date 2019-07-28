@@ -26,7 +26,7 @@
       <label for="parent">{{ __("Parent") }}</label><select class="parent" name="parent">
         <option value=""> — — — — {{ __("Choose One") }} — — — — </option>
         @foreach($taxs as $key => $tax)
-        <option value="{{ $tax->id }}" class="level-{{ $tax->level }}" {{ $tax->id == $the_term -> parent_id ? 'selected':'' }}>{{ $tax->pointer.' '.$tax->name }}</option>
+        <option value="{{ $tax->id }}" class="level-{{ $tax->level }}" {{ $tax->id == $the_term -> parent_id ? 'selected':'' }} @if($the_term->id == $tax->id) disabled @endif>{{ $tax->pointer.' '.$tax->name }}</option>
         @endforeach
       </select>
     </fieldset>
