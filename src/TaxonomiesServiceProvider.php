@@ -41,7 +41,7 @@ class TaxonomiesServiceProvider extends ServiceProvider
          $taxonomy  = isset($_GET['taxonomy']) ? $_GET['taxonomy'] : \Config::get('taxonomies.default_taxonomy');
 
          $view->with('Taxonomy', $theTaxs);
-         $view->with('common', new Models\Common());
+         $view->with('commonx', new Models\Common());
 
          //****************** We check a term ID has been given ***********
          if(isset($_GET['term_id']) && $theTaxs::where('id', $_GET['term_id'])->exists()){

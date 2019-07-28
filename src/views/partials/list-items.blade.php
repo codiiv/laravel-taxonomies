@@ -6,6 +6,8 @@ if(isset(\Request()->unique_to) && \Request()->unique_to){
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $toParse = $Taxonomy::sortedTermsPaginated($taxonomy, $page);
 }
+
+  $uniqueTo = isset(\Request()->unique_to) && \Request()->unique_to ? '&unique_to='.\Request()->unique_to : '';
 ?>
 <div class="pagination-container">
   {{ $toParse->links() }}
@@ -22,10 +24,14 @@ if(isset(\Request()->unique_to) && \Request()->unique_to){
     <input type="hidden" name="unique_to" value="{{ \Request()->unique_to }}">
   @endif
   </form>
-  <?php
-    $uniqueTo = isset(\Request()->unique_to) && \Request()->unique_to ? '&unique_to='.\Request()->unique_to : '';
-  ?>
+
   @foreach($toParse as $key => $term )
+  <?php
+    $storedUnique = $term->unique_to;
+    if($uniqueTo=='' && $storedUnique !=''){
+      $uniqueTo = '&unique_to='.$storedUnique;
+    }
+  ?>
   <li data-value="{{ $term->id }}" class="level-{{ $term->level }} @if((isset($term_exists) && $term_exists) && $the_term->id == $term->id) beingedited @endif">
     <a href="{{ url()->current().'?taxonomy='.$taxonomy.'&term_id='.$term->id.$uniqueTo}}<?php if(isset($_GET['page'])) echo '&page='.$_GET['page']; ?>"><span class="tax-color" style="background-color:{{ $term->color }}"></span> {{ $term->pointer.' '.$term->name }} <span class="theslug">[ {{ $term->slug }} ]</span></a>
     <div class="taxonomies-actions" style="display:none">
