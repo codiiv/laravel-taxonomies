@@ -1,0 +1,42 @@
+{
+    "name": "codiiv/laravel-taxonomies",
+    "description": "Taxonomies for Laravel (Similar to Wordpress)",
+    "homepage": "https://github.com/codiiv/laravel-taxonomies",
+    "keywords": [
+        "taxonomy",
+        "taxonomies",
+        "laravel taxonomies",
+        "laravel tags",
+        "laravel locations"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Codiiv",
+            "email": "codiivdev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "Codiiv\\Taxonomies\\": "/src"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+      },
+      "extra": {
+          "laravel": {
+              "providers": [
+                  "Codiiv\\Taxonomies\\TaxonomiesServiceProvider"
+              ]
+          }
+      },
+      "minimum-stability": "stable",
+      "require": {
+        "laravel/framework": "^6.0",
+        "codiiv/extrameta": "dev-master"
+      },
+      "require-dev": {
+          "laravel/laravel": "^6.0"
+    }
+}
