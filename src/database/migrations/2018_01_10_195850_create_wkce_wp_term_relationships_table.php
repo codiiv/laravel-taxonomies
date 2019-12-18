@@ -31,7 +31,7 @@ class CreateWkceWpTermRelationshipsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('wkce_term_relationships');
+		Schema::drop('term_relationships');
 	}
 
 }
