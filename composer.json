@@ -34,11 +34,11 @@
       "minimum-stability": "stable",
       "require": {
         "laravel/framework": "^6.0 || ^7.0 || ^8.0",
-        "codiiv/extrameta": "^1.1"
+        "codiiv/extrameta": ">=1.1"
       },
       "require-dev": {
           "laravel/laravel": "^6.0 || ^7.0 || ^8.0",
-          "codiiv/extrameta": "^1.1"
+          "codiiv/extrameta": ">=1.1"
           
     }
 }
