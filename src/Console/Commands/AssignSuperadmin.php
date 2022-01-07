@@ -3,7 +3,7 @@
 namespace Codiiv\Taxonomies\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\User;
+use App\Models\User;
 
 class AssignSuperadmin extends Command
 {
