@@ -31,6 +31,7 @@ class TaxonomiesController extends Controller
     }
 
     $perPage = ($itemsPerPage > 0) ? $itemsPerPage:10; //To avoid division by zero
+    
     // $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>url(\Config::get('taxonomies.taxonomy_path').'?taxonomy='.$taxonomy)]);
     $paginatedTerms = new LengthAwarePaginator($collection->forPage($page, $perPage), $collection->count(), $perPage, $page, ['path'=>'?taxonomy='.$taxonomy]);
 
@@ -69,13 +70,12 @@ class TaxonomiesController extends Controller
     $tax->description  = $request->description != "" ? $request->description : " ";
     $tax->unique_to =  $request->unique_to;
     $tax->save();
-    $taxId = $tax->id;
-    if($taxId){
+    if($tax->id){
       $message = "Added successfully";
       $msgtype = 1;
     }else{
-      $message = "There were errors";
-      $msgtype = 1;
+      $message = "We encountered errors processing that request";
+      $msgtype = 0;
     }
     $taxonomiesPath = \Config::get('taxonomies.taxonomy_path');
     return redirect($back_to)->with(["itemtype"=>'company',"message"=>$message, "msgtype"=>$msgtype]);
