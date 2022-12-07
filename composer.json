@@ -33,11 +33,11 @@
       },
       "minimum-stability": "stable",
       "require": {
-        "laravel/framework": "^6.0 || ^7.0 || ^8.0" || ^9.0"
+        "laravel/framework": "^6.0 || ^7.0 || ^8.0 || ^9.0"
         "codiiv/extrameta": ">=1.1"
       },
       "require-dev": {
-          "laravel/laravel": "^6.0 || ^7.0 || ^8.0" || ^9.0"
+          "laravel/laravel": "^6.0 || ^7.0 || ^8.0 || ^9.0"
           "codiiv/extrameta": ">=1.1"
           
     }
